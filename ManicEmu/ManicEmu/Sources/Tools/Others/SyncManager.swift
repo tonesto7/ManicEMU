@@ -23,14 +23,35 @@ class SyncManager: NSObject {
     var iCloudServiceEnable: Bool? = nil
     
     var hasDownloadTask: Bool {
-        downloadingFiles.count > 0
+        downloadingFilesQueue.sync { downloadingFiles.count > 0 }
     }
     
     private var downloadingFiles: [String] = []
+    private let downloadingFilesQueue = DispatchQueue(label: "com.manicemu.downloadingFiles")
     
     private var stopGameNotification: Any? = nil
     
     private var iCloudAccountChangedNotification: Any? = nil
+    
+    struct SyncFileInfo: Hashable {
+        let url: URL
+        let fileName: String
+        let direction: Direction
+        var percentComplete: Double // 0.0 - 100.0
+        
+        enum Direction: String {
+            case upload
+            case download
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(url)
+        }
+        
+        static func == (lhs: SyncFileInfo, rhs: SyncFileInfo) -> Bool {
+            lhs.url == rhs.url
+        }
+    }
     
     enum SyncState: String {
         case undefine
@@ -47,12 +68,21 @@ class SyncManager: NSObject {
         }
     }
     
+    /// Main-thread snapshot of currently syncing files for UI consumption
+    private(set) var syncingFiles: [SyncFileInfo] = []
+    
+    var uploadCount: Int { syncingFiles.filter { $0.direction == .upload }.count }
+    var downloadCount: Int { syncingFiles.filter { $0.direction == .download }.count }
+    
     // MARK: - iCloud 文件状态监控
     private let metadataQuery = NSMetadataQuery()
     private var metadataQueryNotificationTokens: [NSObjectProtocol] = []
     private var isMonitoring = false
     private var monitoredUploadingFiles = Set<URL>()
     private var monitoredDownloadingFiles = Set<URL>()
+    /// Per-file progress tracking (accessed only on monitoringQueue)
+    private var uploadingFileProgress: [URL: Double] = [:]
+    private var downloadingFileProgress: [URL: Double] = [:]
     private let monitoringQueue = DispatchQueue(label: "com.manicemu.syncmanager.monitoring")
     
     deinit {
@@ -239,9 +269,12 @@ class SyncManager: NSObject {
             if !wasUploading {
                 monitoredUploadingFiles.insert(fileURL)
             }
+            let percent = item.value(forAttribute: NSMetadataUbiquitousItemPercentUploadedKey) as? Double ?? 0.0
+            uploadingFileProgress[fileURL] = percent
         } else {
             if wasUploading {
                 monitoredUploadingFiles.remove(fileURL)
+                uploadingFileProgress.removeValue(forKey: fileURL)
             }
         }
         
@@ -250,9 +283,12 @@ class SyncManager: NSObject {
             if !wasDownloading {
                 monitoredDownloadingFiles.insert(fileURL)
             }
+            let percent = item.value(forAttribute: NSMetadataUbiquitousItemPercentDownloadedKey) as? Double ?? 0.0
+            downloadingFileProgress[fileURL] = percent
         } else {
             if wasDownloading {
                 monitoredDownloadingFiles.remove(fileURL)
+                downloadingFileProgress.removeValue(forKey: fileURL)
             }
         }
     }
@@ -297,15 +333,35 @@ class SyncManager: NSObject {
     private func resetTrackingState() {
         monitoredUploadingFiles.removeAll()
         monitoredDownloadingFiles.removeAll()
+        uploadingFileProgress.removeAll()
+        downloadingFileProgress.removeAll()
         updateSyncState()
     }
     
     private func updateSyncState() {
         let hasActiveTasks = !monitoredUploadingFiles.isEmpty || !monitoredDownloadingFiles.isEmpty
         let newState: SyncState = hasActiveTasks ? .syncing : .idle
-        guard newState != syncState else { return }
+        
+        // Build snapshot on monitoring queue
+        var files: [SyncFileInfo] = []
+        for url in monitoredUploadingFiles {
+            let percent = uploadingFileProgress[url] ?? 0.0
+            files.append(SyncFileInfo(url: url, fileName: url.lastPathComponent, direction: .upload, percentComplete: percent))
+        }
+        for url in monitoredDownloadingFiles {
+            let percent = downloadingFileProgress[url] ?? 0.0
+            files.append(SyncFileInfo(url: url, fileName: url.lastPathComponent, direction: .download, percentComplete: percent))
+        }
+        
         DispatchQueue.main.async { [weak self] in
-            self?.syncState = newState
+            guard let self = self else { return }
+            self.syncingFiles = files
+            if newState != self.syncState {
+                self.syncState = newState
+            } else if newState == .syncing {
+                // State hasn't changed but progress data has — still notify observers
+                NotificationCenter.default.post(name: Constants.NotificationName.iCloudDriveSyncChange, object: self.syncState)
+            }
         }
     }
     
@@ -330,7 +386,10 @@ class SyncManager: NSObject {
     }
     
     static func download(to localFilePath: String, completion: ((Error?)->Void)? = nil) {
-        if SyncManager.shared.downloadingFiles.contains(localFilePath) {
+        let alreadyDownloading = SyncManager.shared.downloadingFilesQueue.sync {
+            SyncManager.shared.downloadingFiles.contains(localFilePath)
+        }
+        if alreadyDownloading {
             UIView.makeToast(message: R.string.localizable.filesDownloadErrorFileExist(localFilePath.deletingPathExtension.lastPathComponent))
             return
         }
@@ -350,16 +409,22 @@ class SyncManager: NSObject {
                     if !FileManager.default.fileExists(atPath: localFilePath.deletingLastPathComponent) {
                         try? FileManager.default.createDirectory(atPath: localFilePath.deletingLastPathComponent, withIntermediateDirectories: true)
                     }
-                    SyncManager.shared.downloadingFiles.append(localFilePath)
+                    SyncManager.shared.downloadingFilesQueue.sync {
+                        SyncManager.shared.downloadingFiles.append(localFilePath)
+                    }
                     try await cloudDrive.download(from: cloudFilePath, toURL: URL(fileURLWithPath: localFilePath))
                     Log.debug("[iCloud Sync]文件已提交到iCloud下载队列:\(localFilePath)")
                     // 注意：文件可能还在下载中，真实状态由 NSMetadataQuery 监控
-                    SyncManager.shared.downloadingFiles.removeAll { $0 == localFilePath }
+                    SyncManager.shared.downloadingFilesQueue.sync {
+                        SyncManager.shared.downloadingFiles.removeAll { $0 == localFilePath }
+                    }
                     await MainActor.run {
                         completion?(nil)
                     }
                 } catch {
-                    SyncManager.shared.downloadingFiles.removeAll { $0 == localFilePath }
+                    SyncManager.shared.downloadingFilesQueue.sync {
+                        SyncManager.shared.downloadingFiles.removeAll { $0 == localFilePath }
+                    }
                     await MainActor.run {
                         completion?(error as? Error)
                     }
