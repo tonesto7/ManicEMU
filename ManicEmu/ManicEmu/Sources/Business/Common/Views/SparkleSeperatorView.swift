@@ -40,16 +40,18 @@ class SparkleSeperatorView: UIView {
         addSubview(leftLine)
         leftLine.snp.makeConstraints { make in
             make.height.equalTo(Constants.Size.BorderLineHeight)
-            make.leading.centerY.equalToSuperview()
-            make.trailing.equalTo(starView.snp.leading).offset(-Constants.Size.ContentSpaceMin)
+            make.leading.equalToSuperview().priority(.high)
+            make.centerY.equalToSuperview()
+            make.trailing.equalTo(starView.snp.leading).offset(-Constants.Size.ContentSpaceMin).priority(.high)
         }
         let rightLine = UIView()
         rightLine.backgroundColor = lineColor ?? color
         addSubview(rightLine)
         rightLine.snp.makeConstraints { make in
             make.height.equalTo(Constants.Size.BorderLineHeight)
-            make.trailing.centerY.equalToSuperview()
-            make.leading.equalTo(starView.snp.trailing).offset(Constants.Size.ContentSpaceMin)
+            make.trailing.equalToSuperview().priority(.high)
+            make.centerY.equalToSuperview()
+            make.leading.equalTo(starView.snp.trailing).offset(Constants.Size.ContentSpaceMin).priority(.high)
         }
     }
     

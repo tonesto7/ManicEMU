@@ -157,19 +157,19 @@ class GamesToolView: UIView {
             icon.snp.makeConstraints { make in
                 make.top.equalToSuperview().offset(Constants.Size.ContentSpaceMax)
                 if index == 0 {
-                    make.leading.equalToSuperview().offset(Constants.Size.ContentSpaceMax)
+                    make.leading.equalToSuperview().offset(Constants.Size.ContentSpaceMax).priority(.high)
                 } else {
-                    make.leading.equalTo(icons[index-1].snp.trailing).offset(Constants.Size.ContentSpaceMid)
+                    make.leading.equalTo(icons[index-1].snp.trailing).offset(Constants.Size.ContentSpaceMid).priority(.high)
                 }
                 if index == icons.count - 1 {
-                    make.trailing.lessThanOrEqualToSuperview().offset(-Constants.Size.ContentSpaceMax)
+                    make.trailing.lessThanOrEqualToSuperview().offset(-Constants.Size.ContentSpaceMax).priority(.high)
                 }
             }
         }
         
         addSubview(manufacturerCategoryView)
         manufacturerCategoryView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(Constants.Size.ContentSpaceMid)
+            make.leading.trailing.equalToSuperview().inset(Constants.Size.ContentSpaceMid).priority(.high)
             make.height.equalTo(Constants.Size.ItemHeightUltraTiny)
             make.bottom.equalToSuperview().inset(Constants.Size.ContentSpaceMid)
         }

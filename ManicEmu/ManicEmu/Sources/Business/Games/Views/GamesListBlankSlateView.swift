@@ -28,7 +28,7 @@ class GamesListBlankSlateView: BaseView {
         let seperator = SparkleSeperatorView()
         containerView.addSubview(seperator)
         seperator.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(containerView).inset(Constants.Size.ContentSpaceMax)
+            make.leading.trailing.equalTo(containerView).inset(Constants.Size.ContentSpaceMax).priority(.high)
             make.height.equalTo(16)
             make.centerY.equalToSuperview()
         }
@@ -39,8 +39,8 @@ class GamesListBlankSlateView: BaseView {
         guideContainer.snp.makeConstraints { make in
             make.bottom.equalTo(seperator.snp.top).offset(-40)
             make.centerX.equalToSuperview()
-            make.leading.greaterThanOrEqualToSuperview().offset(Constants.Size.ContentSpaceMax)
-            make.trailing.lessThanOrEqualToSuperview().offset(-Constants.Size.ContentSpaceMax)
+            make.leading.greaterThanOrEqualToSuperview().offset(Constants.Size.ContentSpaceMax).priority(.high)
+            make.trailing.lessThanOrEqualToSuperview().offset(-Constants.Size.ContentSpaceMax).priority(.high)
         }
         let guideLabelLeft = UILabel()
         guideLabelLeft.textColor = Constants.Color.LabelPrimary
@@ -75,8 +75,8 @@ class GamesListBlankSlateView: BaseView {
         welcomeContainer.snp.makeConstraints { make in
             make.bottom.equalTo(guideContainer.snp.top).offset(-Constants.Size.ContentSpaceTiny)
             make.centerX.equalToSuperview()
-            make.leading.greaterThanOrEqualToSuperview().offset(Constants.Size.ContentSpaceMax)
-            make.trailing.lessThanOrEqualToSuperview().offset(-Constants.Size.ContentSpaceMax)
+            make.leading.greaterThanOrEqualToSuperview().offset(Constants.Size.ContentSpaceMax).priority(.high)
+            make.trailing.lessThanOrEqualToSuperview().offset(-Constants.Size.ContentSpaceMax).priority(.high)
         }
         let welcomeLabelLeft = UILabel()
         welcomeLabelLeft.textColor = Constants.Color.LabelPrimary
@@ -114,8 +114,8 @@ class GamesListBlankSlateView: BaseView {
             make.centerX.equalToSuperview()
             make.height.equalTo(30)
             make.top.equalTo(seperator.snp.bottom).offset(40)
-            make.leading.greaterThanOrEqualToSuperview().offset(Constants.Size.ContentSpaceMax)
-            make.trailing.lessThanOrEqualToSuperview().offset(-Constants.Size.ContentSpaceMax)
+            make.leading.greaterThanOrEqualToSuperview().offset(Constants.Size.ContentSpaceMax).priority(.high)
+            make.trailing.lessThanOrEqualToSuperview().offset(-Constants.Size.ContentSpaceMax).priority(.high)
         }
         let channelLinkLabel = UILabel()
         let channelName = Locale.prefersCN ? R.string.localizable.qqChannelName() : "Discord"
@@ -126,7 +126,7 @@ class GamesListBlankSlateView: BaseView {
         channelLinkLabel.adjustsFontSizeToFitWidth = true
         channelLinkContainerView.addSubview(channelLinkLabel)
         channelLinkLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(Constants.Size.ContentSpaceMid)
+            make.leading.trailing.equalToSuperview().inset(Constants.Size.ContentSpaceMid).priority(.high)
             make.centerY.equalToSuperview()
         }
         let channelLinkButton = UIButton()
@@ -148,8 +148,8 @@ class GamesListBlankSlateView: BaseView {
         warnningContainer.snp.makeConstraints { make in
             make.bottom.equalToSuperview().offset(-(Constants.Size.ContentInsetBottom + Constants.Size.ItemHeightMax + ((Device.size().rawValue < Size.screen5_8Inch.rawValue || UIDevice.isPad) ? Constants.Size.ContentSpaceHuge : Constants.Size.ContentSpaceMin)))
             make.centerX.equalToSuperview()
-            make.leading.greaterThanOrEqualToSuperview().offset(Constants.Size.ContentSpaceMax)
-            make.trailing.lessThanOrEqualToSuperview().offset(-Constants.Size.ContentSpaceMax)
+            make.leading.greaterThanOrEqualToSuperview().offset(Constants.Size.ContentSpaceMax).priority(.high)
+            make.trailing.lessThanOrEqualToSuperview().offset(-Constants.Size.ContentSpaceMax).priority(.high)
         }
         let warnningIcon = UIImageView(image: UIImage(symbol: .exclamationmarkTriangleFill, size: 14, weight: .medium, colors: [Constants.Color.Background, Constants.Color.Yellow]))
         warnningIcon.contentMode = .center
