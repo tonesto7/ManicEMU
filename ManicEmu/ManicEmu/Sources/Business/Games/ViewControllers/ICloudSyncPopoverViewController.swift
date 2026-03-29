@@ -98,6 +98,17 @@ class ICloudSyncPopoverViewController: UIViewController {
         return label
     }()
 
+    private let directionMetricsRow: UIStackView = {
+        let row = UIStackView()
+        row.axis = .horizontal
+        row.alignment = .fill
+        row.distribution = .fill
+        row.spacing = Constants.Size.ContentSpaceTiny
+        return row
+    }()
+
+    private let directionMetricsSpacer = UIView()
+
     private let currentFileTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Current File"
@@ -168,17 +179,22 @@ class ICloudSyncPopoverViewController: UIViewController {
     }()
 
     private var topConstraint: Constraint?
+    private var cardWidthConstraint: Constraint?
+    private var cardCenterXConstraint: Constraint?
 
     private var files: [SyncManager.SyncFileInfo]
     private var syncState: SyncManager.SyncState
     private let topInsetFromHeader: CGFloat
+    private let anchorRectInWindow: CGRect
     private var currentDisplayFileURL: URL?
     private var liveUpdateTimer: Timer?
+    private let minimumPhoneWidth: CGFloat = 320
 
-    init(files: [SyncManager.SyncFileInfo], syncState: SyncManager.SyncState, topInsetFromHeader: CGFloat) {
+    init(files: [SyncManager.SyncFileInfo], syncState: SyncManager.SyncState, topInsetFromHeader: CGFloat, anchorRectInWindow: CGRect) {
         self.files = files
         self.syncState = syncState
         self.topInsetFromHeader = topInsetFromHeader
+        self.anchorRectInWindow = anchorRectInWindow
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -197,6 +213,7 @@ class ICloudSyncPopoverViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateTopInset()
+        updateCardWidth()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -219,8 +236,21 @@ class ICloudSyncPopoverViewController: UIViewController {
 
         upPercentLabel.text = String(format: "↑ %.0f%%", averageProgress(for: .upload, files: files))
         downPercentLabel.text = String(format: "↓ %.0f%%", averageProgress(for: .download, files: files))
-        upSizeLabel.text = "↑ \(humanReadableSize(for: files.filter { $0.direction == .upload }))"
-        downSizeLabel.text = "↓ \(humanReadableSize(for: files.filter { $0.direction == .download }))"
+        upSizeLabel.text = humanReadableSize(for: files.filter { $0.direction == .upload })
+        downSizeLabel.text = humanReadableSize(for: files.filter { $0.direction == .download })
+
+        let uploadFiles = files.filter { $0.direction == .upload }
+        let downloadFiles = files.filter { $0.direction == .download }
+        let hasUploadValues = !uploadFiles.isEmpty
+        let hasDownloadValues = !downloadFiles.isEmpty
+
+        // Download: size left of percentage. Upload: size right of percentage.
+        downSizeLabel.isHidden = !hasDownloadValues
+        downPercentLabel.isHidden = !hasDownloadValues
+        upPercentLabel.isHidden = !hasUploadValues
+        upSizeLabel.isHidden = !hasUploadValues
+        directionMetricsSpacer.isHidden = !(hasUploadValues && hasDownloadValues)
+        directionMetricsRow.isHidden = !(hasUploadValues || hasDownloadValues)
 
         subtitleLabel.text = syncState == .syncing ? R.string.localizable.iCloudSyncing() : R.string.localizable.iCloudSynced()
 
@@ -231,6 +261,7 @@ class ICloudSyncPopoverViewController: UIViewController {
             progressBar.isHidden = false
             progressLabel.isHidden = false
             emptyStateLabel.isHidden = true
+            subtitleLabel.isHidden = false
 
             currentFileNameLabel.text = current.fileName
             currentFileSizeLabel.text = humanReadableSize(for: current.url)
@@ -245,9 +276,12 @@ class ICloudSyncPopoverViewController: UIViewController {
             progressBar.isHidden = true
             progressLabel.isHidden = true
             emptyStateLabel.isHidden = false
+            // Avoid duplicate "Synced" status text.
+            subtitleLabel.isHidden = true
             progressLabel.text = "0%"
             progressBar.setProgress(0, animated: false)
         }
+        updateCardWidth()
     }
 
     private func setupViews() {
@@ -262,13 +296,11 @@ class ICloudSyncPopoverViewController: UIViewController {
         let horizontalInset: CGFloat = UIDevice.isPhone ? Constants.Size.ContentSpaceTiny : Constants.Size.ContentSpaceMid
 
         cardView.snp.makeConstraints { make in
-            make.leading.equalTo(view.safeAreaLayoutGuide).offset(horizontalInset)
-            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-horizontalInset)
+            make.leading.greaterThanOrEqualTo(view.safeAreaLayoutGuide).offset(horizontalInset)
+            make.trailing.lessThanOrEqualTo(view.safeAreaLayoutGuide).offset(-horizontalInset)
+            self.cardCenterXConstraint = make.centerX.equalToSuperview().constraint
             self.topConstraint = make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(topInsetFromHeader).constraint
-            if UIDevice.isPad {
-                make.centerX.equalToSuperview()
-                make.width.lessThanOrEqualTo(560)
-            }
+            self.cardWidthConstraint = make.width.equalTo(minimumPhoneWidth).constraint
         }
 
         let headerStack = UIStackView(arrangedSubviews: [headerIconView, titleLabel])
@@ -280,17 +312,11 @@ class ICloudSyncPopoverViewController: UIViewController {
             make.size.equalTo(22)
         }
 
-        let percentRow = UIStackView(arrangedSubviews: [upPercentLabel, downPercentLabel])
-        percentRow.axis = .horizontal
-        percentRow.alignment = .fill
-        percentRow.distribution = .fill
-        percentRow.spacing = Constants.Size.ContentSpaceTiny
-
-        let sizeRow = UIStackView(arrangedSubviews: [upSizeLabel, downSizeLabel])
-        sizeRow.axis = .horizontal
-        sizeRow.alignment = .fill
-        sizeRow.distribution = .fill
-        sizeRow.spacing = Constants.Size.ContentSpaceTiny
+        directionMetricsRow.addArrangedSubview(downSizeLabel)
+        directionMetricsRow.addArrangedSubview(downPercentLabel)
+        directionMetricsRow.addArrangedSubview(directionMetricsSpacer)
+        directionMetricsRow.addArrangedSubview(upPercentLabel)
+        directionMetricsRow.addArrangedSubview(upSizeLabel)
 
         let currentFileMetaRow = UIStackView(arrangedSubviews: [currentFileTitleLabel, currentFileSizeLabel])
         currentFileMetaRow.axis = .horizontal
@@ -310,8 +336,7 @@ class ICloudSyncPopoverViewController: UIViewController {
         let stack = UIStackView(arrangedSubviews: [
             headerStack,
             subtitleLabel,
-            percentRow,
-            sizeRow,
+            directionMetricsRow,
             emptyStateLabel,
             currentFileMetaRow,
             currentFileNameLabel,
@@ -327,12 +352,8 @@ class ICloudSyncPopoverViewController: UIViewController {
             make.edges.equalToSuperview().inset(Constants.Size.ContentSpaceMid)
         }
 
-        percentRow.snp.makeConstraints { make in
+        directionMetricsRow.snp.makeConstraints { make in
             make.height.equalTo(18)
-        }
-
-        sizeRow.snp.makeConstraints { make in
-            make.height.equalTo(16)
         }
 
         progressBar.snp.makeConstraints { make in
@@ -347,8 +368,33 @@ class ICloudSyncPopoverViewController: UIViewController {
     }
 
     private func updateTopInset() {
-        let minTop = topInsetFromHeader
-        topConstraint?.update(offset: minTop)
+        let anchorRect = view.convert(anchorRectInWindow, from: nil)
+        let top = max(topInsetFromHeader, anchorRect.maxY + Constants.Size.ContentSpaceTiny)
+        topConstraint?.update(offset: top)
+    }
+
+    private func updateCardWidth() {
+        let horizontalInset: CGFloat = UIDevice.isPhone ? Constants.Size.ContentSpaceTiny : Constants.Size.ContentSpaceMid
+        let maxWidth = max(0, view.safeAreaLayoutGuide.layoutFrame.width - horizontalInset * 2)
+        guard maxWidth > 0 else { return }
+
+        let minWidth = min(minimumPhoneWidth, maxWidth)
+
+        let fileNameText = currentFileNameLabel.text ?? ""
+        let fileNameWidth = (fileNameText as NSString).size(withAttributes: [.font: currentFileNameLabel.font as Any]).width
+
+        // Width grows with filename content, with extra room for paddings and meta rows.
+        let desiredWidthFromFileName = fileNameWidth + (Constants.Size.ContentSpaceMid * 4) + 80
+        let targetWidth = min(max(max(minWidth, 360), desiredWidthFromFileName), maxWidth)
+
+        cardWidthConstraint?.update(offset: targetWidth)
+
+        let anchorRect = view.convert(anchorRectInWindow, from: nil)
+        let safeFrame = view.safeAreaLayoutGuide.layoutFrame
+        let minCenterX = safeFrame.minX + horizontalInset + targetWidth / 2
+        let maxCenterX = safeFrame.maxX - horizontalInset - targetWidth / 2
+        let clampedCenterX = min(max(anchorRect.midX, minCenterX), maxCenterX)
+        cardCenterXConstraint?.update(offset: clampedCenterX - view.bounds.midX)
     }
     
     private func averageProgress(for direction: SyncManager.SyncFileInfo.Direction,

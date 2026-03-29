@@ -640,7 +640,11 @@ class GamesViewController: BaseViewController {
         let popoverVC = ICloudSyncPopoverViewController(
             files: SyncManager.shared.syncingFiles,
             syncState: SyncManager.shared.syncState,
-            topInsetFromHeader: gamesNavigationView.frame.maxY + Constants.Size.ContentSpaceTiny
+            topInsetFromHeader: gamesNavigationView.frame.maxY + Constants.Size.ContentSpaceTiny,
+            anchorRectInWindow: gamesNavigationView.iCloudSyncStatusView.convert(
+                gamesNavigationView.iCloudSyncStatusView.bounds,
+                to: nil
+            )
         )
         popoverVC.modalPresentationStyle = .overCurrentContext
         popoverVC.modalTransitionStyle = .crossDissolve

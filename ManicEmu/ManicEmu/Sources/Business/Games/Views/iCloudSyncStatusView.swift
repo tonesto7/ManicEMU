@@ -8,118 +8,71 @@
 
 import UIKit
 
-class ICloudSyncStatusView: RoundAndBorderView {
-    private let cloudIcon: UIImageView = {
-        let view = UIImageView()
-        view.contentMode = .scaleAspectFit
-        let symbol: SFSymbol
+class ICloudSyncStatusView: SymbolButton {
+    private var syncSymbol: SFSymbol {
         if #available(iOS 17.0, *) {
-            symbol = .arrowTriangle2CirclepathIcloudFill
-        } else {
-            symbol = .cloudFill
+            return .arrowTriangle2CirclepathIcloudFill
         }
-        view.image = UIImage(symbol: symbol,
-                             font: UIFont.systemFont(ofSize: 12, weight: .semibold),
-                             color: Constants.Color.LabelPrimary)
-        return view
-    }()
-
-    // iPhone: single percentage
-    private let singlePercentLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.monospacedDigitSystemFont(ofSize: 10, weight: .semibold)
-        label.textColor = Constants.Color.Blue
-        label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.75
-        label.text = "0%"
-        return label
-    }()
-
-    // iPad: up/down percentages
-    private let upLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.monospacedDigitSystemFont(ofSize: 10, weight: .semibold)
-        label.textColor = Constants.Color.Blue
-        label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.75
-        label.text = "↑ 0%"
-        return label
-    }()
-
-    private let downLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.monospacedDigitSystemFont(ofSize: 10, weight: .semibold)
-        label.textColor = Constants.Color.Green
-        label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.75
-        label.textAlignment = .right
-        label.text = "↓ 0%"
-        return label
-    }()
+        return .cloudFill
+    }
 
     init() {
         super.init(
-            roundCorner: .allCorners,
-            radius: 18,
-            borderColor: Constants.Color.Border,
-            borderWidth: 1
+            image: UIImage(symbol: .cloudFill,
+                           font: UIFont.systemFont(ofSize: 12, weight: .semibold),
+                           color: Constants.Color.LabelPrimary),
+            title: "",
+            titleFont: UIFont.monospacedDigitSystemFont(ofSize: 10, weight: .semibold),
+            titleColor: Constants.Color.Blue,
+            horizontalContian: true,
+            titlePosition: .right,
+            imageAndTitlePadding: 4,
+            enableGlass: true
         )
+        enableRoundCorner = true
         backgroundColor = Constants.Color.BackgroundPrimary
-        setupSubviews()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupSubviews() {
-        addSubviews([cloudIcon, singlePercentLabel, upLabel, downLabel])
-
-        cloudIcon.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(Constants.Size.ContentSpaceTiny)
-            make.centerY.equalToSuperview()
-            make.size.equalTo(14)
-        }
-
-        singlePercentLabel.snp.makeConstraints { make in
-            make.leading.equalTo(cloudIcon.snp.trailing).offset(4)
-            make.trailing.equalToSuperview().offset(-Constants.Size.ContentSpaceTiny)
-            make.centerY.equalToSuperview()
-        }
-
-        upLabel.snp.makeConstraints { make in
-            make.leading.equalTo(cloudIcon.snp.trailing).offset(4)
-            make.centerY.equalToSuperview()
-        }
-
-        downLabel.snp.makeConstraints { make in
-            make.leading.equalTo(upLabel.snp.trailing).offset(6)
-            make.trailing.equalToSuperview().offset(-Constants.Size.ContentSpaceTiny)
-            make.centerY.equalToSuperview()
-        }
-
-        updateLayoutForDevice()
-    }
-
     func update(with files: [SyncManager.SyncFileInfo]) {
-        let hasActive = !files.isEmpty
-        let overall = overallAverageProgress(files: files)
+        let isIdle = files.isEmpty
+        if isIdle {
+            imageView.image = UIImage(
+                symbol: .checkmarkIcloudFill,
+                font: UIFont.systemFont(ofSize: 12, weight: .semibold),
+                color: Constants.Color.Green
+            )
+            titleLabel.text = ""
+            return
+        }
 
-        singlePercentLabel.text = String(format: "%.0f%%", overall)
-        upLabel.text = String(format: "↑ %.0f%%", averageProgress(for: .upload, files: files))
-        downLabel.text = String(format: "↓ %.0f%%", averageProgress(for: .download, files: files))
+        imageView.image = UIImage(
+            symbol: syncSymbol,
+            font: UIFont.systemFont(ofSize: 12, weight: .semibold),
+            color: Constants.Color.LabelPrimary
+        )
 
         if UIDevice.isPhone {
-            // iPhone: icon only when idle, icon + single % when syncing
-            singlePercentLabel.isHidden = !hasActive
+            titleLabel.textColor = Constants.Color.Blue
+            titleLabel.text = String(format: "%.0f%%", overallAverageProgress(files: files))
+        } else {
+            let uploadFiles = files.filter { $0.direction == .upload }
+            let downloadFiles = files.filter { $0.direction == .download }
+            var parts: [String] = []
+            if !uploadFiles.isEmpty {
+                let up = averageProgress(for: .upload, files: files)
+                parts.append(String(format: "↑%.0f%%", up))
+            }
+            if !downloadFiles.isEmpty {
+                let down = averageProgress(for: .download, files: files)
+                parts.append(String(format: "↓%.0f%%", down))
+            }
+            titleLabel.textColor = Constants.Color.LabelPrimary
+            titleLabel.text = parts.joined(separator: " ")
         }
-    }
-
-    private func updateLayoutForDevice() {
-        let isPhone = UIDevice.isPhone
-        singlePercentLabel.isHidden = !isPhone
-        upLabel.isHidden = isPhone
-        downLabel.isHidden = isPhone
     }
 
     private func overallAverageProgress(files: [SyncManager.SyncFileInfo]) -> Double {

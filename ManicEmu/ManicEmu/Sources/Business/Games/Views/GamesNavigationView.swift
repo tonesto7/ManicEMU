@@ -58,19 +58,24 @@ class GamesNavigationView: UIView {
         }
         
         iCloudSyncStatusView.snp.makeConstraints { make in
-            make.trailing.equalTo(historyButton.snp.leading).offset(-Constants.Size.ContentSpaceTiny)
+            make.leading.equalTo(controllerButton.snp.trailing).offset(Constants.Size.ContentSpaceTiny)
+            make.trailing.lessThanOrEqualTo(appTitle.snp.leading).offset(-Constants.Size.ContentSpaceTiny)
             make.centerY.equalToSuperview()
             make.height.equalTo(Constants.Size.IconSizeMax.height)
-            self.iCloudSyncStatusWidthConstraint = make.width.equalTo(UIDevice.isPhone ? 36 : 96).constraint
+            self.iCloudSyncStatusWidthConstraint = make.width.equalTo(Constants.Size.IconSizeMax.width).constraint
         }
     }
 
     func updateICloudSyncStatusWidth(hasActiveTasks: Bool) {
         let width: CGFloat
-        if UIDevice.isPhone {
-            width = hasActiveTasks ? 66 : 36
+        if hasActiveTasks {
+            if UIDevice.isPhone {
+                width = 66
+            } else {
+                width = 124
+            }
         } else {
-            width = hasActiveTasks ? 110 : 96
+            width = Constants.Size.IconSizeMax.width
         }
         iCloudSyncStatusWidthConstraint?.update(offset: width)
         layoutIfNeeded()
