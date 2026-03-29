@@ -39,6 +39,16 @@
 
 namespace nihstro {
 
+template <typename T, typename Enable = void>
+struct MakeUnsignedOrSelf {
+    using type = typename std::make_unsigned<T>::type;
+};
+
+template <typename T>
+struct MakeUnsignedOrSelf<T, typename std::enable_if<!std::is_integral<T>::value && !std::is_enum<T>::value>::type> {
+    using type = T;
+};
+
 /*
  * Abstract bitfield class
  *
@@ -187,7 +197,7 @@ private:
         std::enable_if < true, T >> ::type::type StorageType;
 
     // Unsigned version of StorageType
-    typedef typename std::make_unsigned<StorageType>::type StorageTypeU;
+    typedef typename MakeUnsignedOrSelf<StorageType>::type StorageTypeU;
 
     __forceinline StorageType GetMask() const
     {

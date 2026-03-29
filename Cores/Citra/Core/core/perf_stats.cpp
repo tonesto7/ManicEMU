@@ -4,12 +4,12 @@
 
 #include <algorithm>
 #include <chrono>
+#include <ctime>
 #include <iterator>
 #include <mutex>
 #include <numeric>
 #include <sstream>
 #include <thread>
-#include <fmt/chrono.h>
 #include <fmt/format.h>
 #include "common/file_util.h"
 #include "common/settings.h"
@@ -40,9 +40,11 @@ PerfStats::~PerfStats() {
     std::copy(perf_history.begin() + IgnoreFrames, perf_history.begin() + current_index,
               std::ostream_iterator<double>(stream, "\n"));
     const std::string& path = FileUtil::GetUserPath(FileUtil::UserPath::LogDir);
-    // %F Date format expanded is "%Y-%m-%d"
-    const std::string filename =
-        fmt::format("{}/{:%F-%H-%M}_{:016X}.csv", path, *std::localtime(&t), title_id);
+    char timestamp[32]{};
+    if (const auto* local_time = std::localtime(&t)) {
+        std::strftime(timestamp, sizeof(timestamp), "%F-%H-%M", local_time);
+    }
+    const std::string filename = fmt::format("{}/{}_{:016X}.csv", path, timestamp, title_id);
     FileUtil::IOFile file(filename, "w");
     file.WriteString(stream.str());
 }
