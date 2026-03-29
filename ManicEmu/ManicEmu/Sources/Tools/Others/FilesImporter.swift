@@ -524,7 +524,7 @@ extension FilesImporter {
                                 }
                             }
                             do {
-                                try realm.write { realm.add(game) }
+                                try realm.write { realm.add(game, update: .modified) }
                                 SyncManager.upload(localFilePath: game.romUrl.path)
                                 // Upload companion files (.bin, .img, .sub, etc.) for multi-file ROMs
                                 if items.count > 0 {
@@ -696,7 +696,7 @@ extension FilesImporter {
                         skin.skinData = CreamAsset.create(objectID: skin.id, propName: "skinData", url: url)
                         do {
                             try realm.write {
-                                realm.add(skin)
+                                realm.add(skin, update: .modified)
                             }
                             SyncManager.upload(localFilePath: skin.fileURL.path)
                             completion?(skin.name, nil)
