@@ -103,7 +103,7 @@ class DownloadManager {
     func downloads(urls: [URL], fileNames: [String], headers: [String: String]? = nil) {
         NotificationCenter.default.post(name: Constants.NotificationName.BeginDownload, object: nil)
         DispatchQueue.global().async {
-            self.sessionManager.multiDownload(urls, headersArray: headers == nil ? nil : urls.map({ _ in headers! }), fileNames: fileNames)
+            self.sessionManager.multiDownload(urls, headersArray: headers.map { value in urls.map { _ in value } }, fileNames: fileNames)
 //            for task in tasks {
 //                task.progress { task in
 //                    self.didProgress?(task)

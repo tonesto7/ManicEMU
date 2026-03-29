@@ -36,7 +36,8 @@ class ThemeManager {
                         //更新游戏列表样式
                         self?.updateGamelist()
                     }
-                    Log.debug("主题更新 Property '\(property.name)' changed from \(property.oldValue == nil ? "nil" : property.oldValue!) to '\(property.newValue!)'")
+                    let oldValueDescription = property.oldValue.map { "\($0)" } ?? "nil"
+                    Log.debug("主题更新 Property '\(property.name)' changed from \(oldValueDescription) to '\(property.newValue!)'")
                 }
             default:
                 break

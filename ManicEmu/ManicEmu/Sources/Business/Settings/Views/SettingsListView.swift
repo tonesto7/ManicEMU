@@ -92,7 +92,8 @@ class SettingsListView: BaseView {
                             }
                         }
                     }
-                    Log.debug("设置更新 Property '\(property.name)' changed from \(property.oldValue == nil ? "nil" : property.oldValue!) to '\(property.newValue!)'")
+                    let oldValueDescription = property.oldValue.map { "\($0)" } ?? "nil"
+                    Log.debug("设置更新 Property '\(property.name)' changed from \(oldValueDescription) to '\(property.newValue!)'")
                 }
             default:
                 break

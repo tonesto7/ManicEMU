@@ -152,7 +152,7 @@ extension PlayHistoryView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return favouriteGame == nil ? 0 : 1
+            return favouriteGame.map { _ in 1 } ?? 0
         } else {
             return histories.count
         }

@@ -11,7 +11,7 @@ struct ShaderManager {
     
     static func fetchShaders(source: ShadersListView.ShaderSource? = nil, isGlsl: Bool, selectedShader: Shader?, includeOriginal: Bool, shaderConfig: ShaderConfig?, ignoreShaderConfig: Bool, currentCoreName: String?) -> ShadersListData {
         var result = ShadersListData()
-        let sourceCase = source == nil ? ShadersListView.ShaderSource.allCases : [source!]
+        let sourceCase = source.map { [$0] } ?? ShadersListView.ShaderSource.allCases
         var hasSelectedShader = false
         for source in sourceCase {
             if source == .imported {

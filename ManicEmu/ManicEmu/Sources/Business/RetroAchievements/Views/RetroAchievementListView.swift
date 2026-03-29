@@ -111,7 +111,7 @@ class RetroAchievementListView: BaseView {
 
 extension RetroAchievementListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cheevosGame == nil ? 0 : 1
+        return cheevosGame.map { _ in 1 } ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

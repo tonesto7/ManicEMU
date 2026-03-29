@@ -67,8 +67,11 @@ class SkinSettingsView: BaseView {
     }()
     
     private lazy var navigationSubTitle: SymbolButton = {
+        let subtitle = game.map {
+            R.string.localizable.skinNavigationSubTitleSpecifiedGame($0.aliasName ?? $0.name)
+        } ?? R.string.localizable.skinNavigationSubTitleCommon()
         let view = SymbolButton(image: UIImage(symbol: .megaphone, font: Constants.Font.caption(), color: Constants.Color.LabelSecondary),
-                                title: game == nil ? R.string.localizable.skinNavigationSubTitleCommon() : R.string.localizable.skinNavigationSubTitleSpecifiedGame(game?.aliasName ?? game!.name),
+                                title: subtitle,
                                 titleFont: Constants.Font.caption(),
                                 titleColor: Constants.Color.LabelSecondary,
                                 titleAlignment: .left,

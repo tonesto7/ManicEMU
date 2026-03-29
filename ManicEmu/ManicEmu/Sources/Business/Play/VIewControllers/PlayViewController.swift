@@ -692,7 +692,8 @@ class PlayViewController: GameViewController {
                         }
                     }
                     
-                    Log.debug("设置更新 Property '\(property.name)' changed from \(property.oldValue == nil ? "nil" : property.oldValue!) to '\(property.newValue!)'")
+                    let oldValueDescription = property.oldValue.map { "\($0)" } ?? "nil"
+                    Log.debug("设置更新 Property '\(property.name)' changed from \(oldValueDescription) to '\(property.newValue!)'")
                 }
             default:
                 break
@@ -1677,7 +1678,7 @@ extension PlayViewController {
             //截屏
             if manicGame.isCitra3DS {
                 if let images = self.snapShotFor3DS() {
-                    DispatchQueue.global().asyncAfter(delay: menuSheet == nil ? 0 : 1, execute: {
+                    DispatchQueue.global().asyncAfter(delay: menuSheet.map { _ in 1 } ?? 0, execute: {
                         var imageDatas = [Data]()
                         for image in images {
                             if let imageData = image.jpegData(compressionQuality: 0.7) {
@@ -1690,7 +1691,7 @@ extension PlayViewController {
                     })
                 }
             } else if manicGame.isLibretroType {
-                DispatchQueue.main.asyncAfter(delay: menuSheet == nil ? 0 : 1, execute: {
+                DispatchQueue.main.asyncAfter(delay: menuSheet.map { _ in 1 } ?? 0, execute: {
                     LibretroCore.sharedInstance().snapshot { image in
                         if (self.manicGame.gameType == .ds || self.manicGame.isAzahar3DS), let i = image, let images = self.snapShotForDualScreen(source: i) {
                             var imageDatas = [Data]()
@@ -3869,7 +3870,7 @@ extension PlayViewController {
             let layoutType = Settings.defalut.airPlayLayout
             var layout: String = ""
             let ratio = 0.3
-            let scale = manicGame.filterName == nil ? UIScreen.main.scale : 1.25
+            let scale = manicGame.filterName.map { _ in CGFloat(1.25) } ?? UIScreen.main.scale
             let dimensions = aiplayScaledDimensions.applying(CGAffineTransform(scaleX: scale, y: scale))
             let bufferSize = "\(dimensions.width),\(dimensions.height)"
             let bottomRatio = 0.75 //NDS和3DS的bottom屏幕都是3:4
@@ -3961,7 +3962,7 @@ extension PlayViewController {
             var layout = ""
             let absX = abs(skinframe.minX - libretroViewFrame.minX)
             let absY = abs(skinframe.minY - libretroViewFrame.minY)
-            let scale = manicGame.filterName == nil ? UIScreen.main.scale : 1.25
+            let scale = manicGame.filterName.map { _ in CGFloat(1.25) } ?? UIScreen.main.scale
             let scaleTransform = CGAffineTransform(scaleX: scale, y: scale)
             var touchGameViewFrame = CGRect.zero
             if var bottomFrame = frames.touchGameViewFrame {
@@ -4213,7 +4214,7 @@ extension PlayViewController {
             }
             
             let label = UILabel()
-            label.numberOfLines = message == nil ? 2 : 3
+            label.numberOfLines = message.map { _ in 3 } ?? 2
             let titleFont = scale == 1.0 ? Constants.Font.title(size: .s, weight: .regular) : UIFont.systemFont(ofSize: 30)
             let matt = NSMutableAttributedString(string: title, attributes: [.font: titleFont, .foregroundColor: Constants.Color.LabelPrimary])
             if let message {
