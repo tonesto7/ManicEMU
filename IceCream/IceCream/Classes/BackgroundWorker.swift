@@ -35,6 +35,9 @@ class BackgroundWorker: NSObject {
                 Thread.exit()
             }
             thread?.name = "\(String(describing: self))-\(UUID().uuidString)"
+            // `start` can be invoked from UI-critical contexts while using `waitUntilDone: true` below.
+            // Match the worker thread QoS to avoid waiting on a lower-priority thread.
+            thread?.qualityOfService = .userInteractive
             thread?.start()
         }
 
