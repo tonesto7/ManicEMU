@@ -13,6 +13,8 @@ import RealmSwift
 import KeyboardKit
 
 class GamesViewController: BaseViewController {
+    private weak var iCloudSyncPopoverVC: ICloudSyncPopoverViewController?
+
     private var cornerMaskViewForiPad: TransparentHoleView = {
         let view = TransparentHoleView()
         return view
@@ -36,6 +38,10 @@ class GamesViewController: BaseViewController {
             self.showSideMenu(leftSide: false)
         }
 
+        view.iCloudSyncStatusView.addTapGesture { [weak self] _ in
+            self?.presentICloudSyncPopover()
+        }
+        
         return view
     }()
     ///顶部工具条 搜索 选择
@@ -85,7 +91,7 @@ class GamesViewController: BaseViewController {
                 return false
             }
             self.gamesListView.filteredManufacturer = manufacturer
-            return (manufacturer == nil ? false : true)
+            return manufacturer != nil
         }
         view.didFilterVisibleChange = { [weak self] in
             guard let self else { return }
@@ -219,6 +225,9 @@ class GamesViewController: BaseViewController {
     
     private weak var sideMenu: UIViewController?
     
+    private var iCloudSyncChangeNotification: Any?
+    private var iCloudEnableChangeNotification: Any?
+    
     private let GameEditToolBarHeightMax = 205.0
     private let GameEditToolBarHeightMin = 116.0
     
@@ -226,10 +235,17 @@ class GamesViewController: BaseViewController {
         if let backgroundChangeNotification {
             NotificationCenter.default.removeObserver(backgroundChangeNotification)
         }
+        if let iCloudSyncChangeNotification {
+            NotificationCenter.default.removeObserver(iCloudSyncChangeNotification)
+        }
+        if let iCloudEnableChangeNotification {
+            NotificationCenter.default.removeObserver(iCloudEnableChangeNotification)
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        definesPresentationContext = true
         self.setupViews()
         //处理Launch Link
         if let launchGameID = ApplicationSceneDelegate.launchGameID {
@@ -239,6 +255,9 @@ class GamesViewController: BaseViewController {
                 PlayViewController.startGame(game: game)
             }
         }
+        
+        setupICloudSyncObserver()
+        updateICloudSyncVisibility()
         
         //背景变更
         backgroundChangeNotification = NotificationCenter.default.addObserver(forName: Constants.NotificationName.GameListBackgroundChange, object: nil, queue: .main) { [weak self] notification in
@@ -345,7 +364,7 @@ class GamesViewController: BaseViewController {
                     //横屏的时候左右都有菜单
                     make.top.bottom.equalToSuperview()
                     make.center.equalToSuperview()
-                    make.width.equalTo(Constants.Size.WindowSize.maxDimension - Constants.Size.SideMenuWidth*2)
+                    make.width.equalTo(Constants.Size.WindowSize.maxDimension - Constants.Size.SideMenuWidth*2).priority(.high)
                 } else {
                     //竖屏的时候只有右边有菜单
                     make.edges.equalToSuperview()
@@ -572,6 +591,61 @@ class GamesViewController: BaseViewController {
             }
             gamesListView.updateRotation()
         }
+    }
+    
+    // MARK: - iCloud Sync Status
+    
+    private func setupICloudSyncObserver() {
+        iCloudSyncChangeNotification = NotificationCenter.default.addObserver(
+            forName: Constants.NotificationName.iCloudDriveSyncChange,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.updateICloudSyncStatus()
+        }
+        
+        iCloudEnableChangeNotification = NotificationCenter.default.addObserver(
+            forName: Constants.NotificationName.iCloudEnableChange,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.updateICloudSyncVisibility()
+        }
+    }
+    
+    private func updateICloudSyncVisibility() {
+        let shouldShow = Settings.defalut.iCloudSyncEnable && PurchaseManager.isMember
+        UIView.normalAnimate {
+            self.gamesNavigationView.iCloudSyncStatusView.isHidden = !shouldShow
+            self.gamesNavigationView.iCloudSyncStatusView.alpha = shouldShow ? 1.0 : 0.0
+        }
+        if !shouldShow {
+            gamesNavigationView.stopSyncAnimation()
+        } else {
+            updateICloudSyncStatus()
+        }
+    }
+    
+    private func updateICloudSyncStatus() {
+        let files = SyncManager.shared.syncingFiles
+        gamesNavigationView.updateICloudSyncStatusWidth(hasActiveTasks: !files.isEmpty)
+        gamesNavigationView.iCloudSyncStatusView.update(with: files)
+        iCloudSyncPopoverVC?.updateContent(with: files, syncState: SyncManager.shared.syncState)
+    }
+
+    private func presentICloudSyncPopover() {
+        guard Settings.defalut.iCloudSyncEnable, PurchaseManager.isMember else { return }
+
+        let popoverVC = ICloudSyncPopoverViewController(
+            files: SyncManager.shared.syncingFiles,
+            syncState: SyncManager.shared.syncState,
+            topInsetFromHeader: gamesNavigationView.frame.maxY + Constants.Size.ContentSpaceTiny
+        )
+        popoverVC.modalPresentationStyle = .overCurrentContext
+        popoverVC.modalTransitionStyle = .crossDissolve
+        iCloudSyncPopoverVC = popoverVC
+        topViewController()?.present(popoverVC, animated: true)
     }
     
     override func handleScreenPanGesture(edges: UIRectEdge) {
