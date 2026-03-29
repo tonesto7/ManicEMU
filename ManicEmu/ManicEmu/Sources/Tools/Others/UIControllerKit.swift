@@ -47,6 +47,15 @@ class UIControllerKit {
                     return
                 }
                 
+                // 键盘方向键的导航已由UIKit焦点系统或KeyboardKit的UIKeyCommand处理，
+                // 跳过键盘来源的方向输入以避免双重移动
+                if case .controller(let controllerType) = input.type, controllerType == .keyboard {
+                    let inputString = input.stringValue
+                    if inputString == "up" || inputString == "down" || inputString == "left" || inputString == "right" {
+                        return
+                    }
+                }
+                
                 var current = firstResponder
                 var pressableResponders: [any UIControllerPressable] = []
                 if let current = current as? any UIControllerPressable {
