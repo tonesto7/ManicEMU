@@ -433,7 +433,7 @@ struct Constants {
         static let MemberKeyChainKey = "MemberKeyChainKey"
         static let OAuthCallbackHost = "manicemu-oauth"
         static let OAuthGoogleDriveCallbackHost = "com.googleusercontent.apps.177622908853-bkjvno7a5v14obn3rn70s264afrll6p7"
-        static let OAuthOneDriveCallbackHost = "msauth.com.aoshuang.manicemu"
+        static let OAuthOneDriveCallbackHost = "msauth.com.tonesto7.manicemu"
         static let TimeFormat = "yyyy-MM-dd HH:mm:ss.SSS"
         static let FileNameTimeFormat = "yyyy-MM-dd_HH-mm-ss-SSS"
         static let PlayPurchaseAlertIdentifier = "PlayPurchaseAlertIdentifier"

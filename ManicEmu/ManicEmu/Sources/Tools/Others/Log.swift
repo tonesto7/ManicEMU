@@ -14,7 +14,7 @@ let Log = XCGLogger(identifier: "XCGLogger", includeDefaultDestinations: false)
 func LogSetup() {
 #if DEBUG
     // Create a destination for the system console log (via NSLog)
-    let systemDestination = AppleSystemLogDestination(identifier: "com.aoshuang.manicemu.log.console")
+    let systemDestination = AppleSystemLogDestination(identifier: "com.tonesto7.manicemu.log.console")
     
     // Optionally set some configuration options
     systemDestination.outputLevel = .debug

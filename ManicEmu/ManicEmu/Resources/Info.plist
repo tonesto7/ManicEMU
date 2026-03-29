@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSBonjourServices</key>
-	<array>
-		<string>_manicemu._tcp</string>
-	</array>
-	<key>NSLocalNetworkUsageDescription</key>
-	<string>Manic EMU needs access to your local network to find and connect with other devices for online gaming.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -477,7 +471,7 @@
 			<string>MSOauth</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>msauth.com.aoshuang.manicemu</string>
+				<string>msauth.com.tonesto7.manicemu</string>
 			</array>
 		</dict>
 		<dict>
@@ -544,8 +538,14 @@
 	</dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Manic EMU requires the use of Bluetooth functionality to enable communication features for certain games.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_manicemu._tcp</string>
+	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>Camera access required to capture photos for custom game covers in Manic EMU</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Manic EMU needs access to your local network to find and connect with other devices for online gaming.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Microphone access required for full Nintendo DS game functionality in Manic EMU</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
@@ -554,7 +554,7 @@
 	<string>Manic EMU requires photo library access to save screenshots and select images for game covers</string>
 	<key>NSUbiquitousContainers</key>
 	<dict>
-		<key>iCloud.com.aoshuang.manicemu</key>
+		<key>iCloud.com.tonesto7.manicemu</key>
 		<dict>
 			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
 			<true/>

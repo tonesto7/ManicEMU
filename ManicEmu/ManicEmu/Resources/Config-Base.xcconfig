@@ -10,6 +10,6 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-APP_BUNDLE_IDENTIFIER = com.aoshuang.manicemu
+APP_BUNDLE_IDENTIFIER = com.tonesto7.manicemu
 APP_BUILD_VERSION = 3
 APP_VERSION = 1.9.0

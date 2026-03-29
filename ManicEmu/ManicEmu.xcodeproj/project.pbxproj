@@ -857,6 +857,8 @@
 		57FC19992DF051180076D93C /* hack_list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57FC19952DF051180076D93C /* hack_list.cpp */; };
 		57J2ME02F23397000EA24F1 /* J2ME.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57J2ME01F23397000EA24F1 /* J2ME.swift */; };
 		7E864E4CE64E0E64CCE47550 /* DOOM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2068D6E791D56FF6148997EA /* DOOM.swift */; };
+		926A3F902F78D1BD00726CD7 /* iCloudSyncStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926A3F8F2F78D1BD00726CD7 /* iCloudSyncStatusView.swift */; };
+		926A3FA12F797AAE00726CD7 /* ICloudSyncPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926A3FA02F797AAE00726CD7 /* ICloudSyncPopoverViewController.swift */; };
 		A392D5652E96682C00F920E7 /* DisabledTapSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392D5632E96682600F920E7 /* DisabledTapSwitch.swift */; };
 		A392D5B32E9796B900F920E7 /* ServiceIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A392D5B22E9796B800F920E7 /* ServiceIconView.swift */; };
 		A3A043802E9BF57A006442C2 /* UIScrollViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A0437F2E9BF57A006442C2 /* UIScrollViewExtensions.swift */; };
@@ -1988,6 +1990,8 @@
 		5D42AD15F67D97D2A7EF83B9 /* Pods-ManicEmu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManicEmu.release.xcconfig"; path = "Target Support Files/Pods-ManicEmu/Pods-ManicEmu.release.xcconfig"; sourceTree = "<group>"; };
 		7436F3E00AF2863DB4D7DBA6 /* Pods-ManicEmu.debugsimulator.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManicEmu.debugsimulator.xcconfig"; path = "Target Support Files/Pods-ManicEmu/Pods-ManicEmu.debugsimulator.xcconfig"; sourceTree = "<group>"; };
 		8716E0FB35012D3F5C750B94 /* Pods-ManicEmu.devrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManicEmu.devrelease.xcconfig"; path = "Target Support Files/Pods-ManicEmu/Pods-ManicEmu.devrelease.xcconfig"; sourceTree = "<group>"; };
+		926A3F8F2F78D1BD00726CD7 /* iCloudSyncStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudSyncStatusView.swift; sourceTree = "<group>"; };
+		926A3FA02F797AAE00726CD7 /* ICloudSyncPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudSyncPopoverViewController.swift; sourceTree = "<group>"; };
 		A392D5632E96682600F920E7 /* DisabledTapSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisabledTapSwitch.swift; sourceTree = "<group>"; };
 		A392D5B22E9796B800F920E7 /* ServiceIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceIconView.swift; sourceTree = "<group>"; };
 		A3A0437F2E9BF57A006442C2 /* UIScrollViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScrollViewExtensions.swift; sourceTree = "<group>"; };
@@ -2331,6 +2335,7 @@
 			children = (
 				A3A043C32E9D3954006442C2 /* GameplayManualsViewController.swift */,
 				577006822D438E2A00762E8F /* GamesViewController.swift */,
+				926A3FA02F797AAE00726CD7 /* ICloudSyncPopoverViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2349,6 +2354,7 @@
 				57E0C19D2D562F8600962555 /* GamesToolView.swift */,
 				574789902D4CD185006F0D99 /* GameEditToolBar.swift */,
 				57478A702D52037F006F0D99 /* RandomGameCollectionReusableView.swift */,
+				926A3F8F2F78D1BD00726CD7 /* iCloudSyncStatusView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5559,6 +5565,7 @@
 				5720E7ED2E547FE100EC0DA5 /* AchievementsProfile.swift in Sources */,
 				57F30CDF2EC44F390035327C /* Manufacturer.swift in Sources */,
 				57DCE8022E0D9F300079E3AA /* SwitchRow.swift in Sources */,
+				926A3F902F78D1BD00726CD7 /* iCloudSyncStatusView.swift in Sources */,
 				57399ACF2E40BB4D00AB73DD /* PSXSBIDescCollectionCell.swift in Sources */,
 				57DCE8032E0D9F300079E3AA /* QuickTableViewController.swift in Sources */,
 				57DCE8042E0D9F300079E3AA /* Deprecated.swift in Sources */,
@@ -5729,6 +5736,7 @@
 				57047A0C2D852E7F00C62FF6 /* FeaturesView.swift in Sources */,
 				577006852D438EA100762E8F /* ControllersSettingViewController.swift in Sources */,
 				577005452D3C91F300762E8F /* AddImportServiceViewController.swift in Sources */,
+				926A3FA12F797AAE00726CD7 /* ICloudSyncPopoverViewController.swift in Sources */,
 				570F59C02DC91FF5007BFD92 /* ColorPickerView.swift in Sources */,
 				57B6ECBD2D7953EC002E619C /* CheatCodeListView.swift in Sources */,
 				573DE1A72F6AF6C70091CE59 /* ZipHandlerView.swift in Sources */,
@@ -5864,7 +5872,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -5894,7 +5902,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../Cores/Citra/Dependencies/XCFrameworks",
-					/opt/homebrew/Cellar/boost/1.89.0/lib,
+					/opt/homebrew/lib,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACH_O_TYPE = staticlib;
@@ -5914,7 +5922,7 @@
 					/usr/local/include,
 					"$(HOME)/VulkanSDK/1.4.309.0/macOS/include",
 					"$(HOME)/VulkanSDK/1.4.309.0/macOS/include/vma",
-					/opt/homebrew/Cellar/boost/1.89.0/include,
+					/opt/homebrew/include,
 				);
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../Cores/Citra/Core/include";
@@ -5931,7 +5939,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -5959,7 +5967,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../Cores/Citra/Dependencies/XCFrameworks",
-					/opt/homebrew/Cellar/boost/1.89.0/lib,
+					/opt/homebrew/lib,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACH_O_TYPE = staticlib;
@@ -5979,7 +5987,7 @@
 					/usr/local/include,
 					"$(HOME)/VulkanSDK/1.4.309.0/macOS/include",
 					"$(HOME)/VulkanSDK/1.4.309.0/macOS/include/vma",
-					/opt/homebrew/Cellar/boost/1.89.0/include,
+					/opt/homebrew/include,
 				);
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../Cores/Citra/Core/include";
@@ -6061,7 +6069,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(APP_BUILD_VERSION)";
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6265,7 +6273,7 @@
 				OTHER_MODULE_VERIFIER_FLAGS = "$(inherited) \"-F${PODS_CONFIGURATION_BUILD_DIR}/BetterSegmentedControl\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/BlankSlate\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Closures\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/CloudServiceKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/CollectionViewPagingLayout\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/DNSPageView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Device\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Fireworks\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/FluentDarkModeKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Fuse\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/GCDWebServer\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/HXPhotoPicker\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Haptica\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardCore\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardNotification\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardReturnManager\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardToolbar\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardToolbarManager\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQTextInputViewNotification\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQTextView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IceCream\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/JXBanner\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/JXPageControl\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/KeychainAccess\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ManicEmuCore\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ManicSupport\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/MarqueeLabel\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/NVActivityIndicatorView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/OAuthSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Permission\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ProHUD\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Realm\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SFSafeSymbols\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SQLCipher\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SQLite.swift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SSZipArchive\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Schedule\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SideMenu\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SnapKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SwifterSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SwipeCellKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Tiercel\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/VisualEffectView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation\"";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "${APP_BUNDLE_IDENTIFIER}";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = "${APP_BUNDLE_IDENTIFIER}";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.tonesto7.manicemu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -6289,7 +6297,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -6317,7 +6325,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../Cores/Citra/Dependencies/XCFrameworks",
-					/opt/homebrew/Cellar/boost/1.89.0/lib,
+					/opt/homebrew/lib,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACH_O_TYPE = staticlib;
@@ -6337,7 +6345,7 @@
 					/usr/local/include,
 					"$(HOME)/VulkanSDK/1.4.309.0/macOS/include",
 					"$(HOME)/VulkanSDK/1.4.309.0/macOS/include/vma",
-					/opt/homebrew/Cellar/boost/1.89.0/include,
+					/opt/homebrew/include,
 				);
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../Cores/Citra/Core/include";
@@ -6419,7 +6427,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(APP_BUILD_VERSION)";
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -6534,7 +6542,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "${APP_BUNDLE_IDENTIFIER}";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = "${APP_BUNDLE_IDENTIFIER}";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.tonesto7.manicemu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -6558,7 +6566,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -6586,7 +6594,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../Cores/Citra/Dependencies/XCFrameworks",
-					/opt/homebrew/Cellar/boost/1.89.0/lib,
+					/opt/homebrew/lib,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACH_O_TYPE = staticlib;
@@ -6606,7 +6614,7 @@
 					/usr/local/include,
 					"$(HOME)/VulkanSDK/1.4.309.0/macOS/include",
 					"$(HOME)/VulkanSDK/1.4.309.0/macOS/include/vma",
-					/opt/homebrew/Cellar/boost/1.89.0/include,
+					/opt/homebrew/include,
 				);
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../Cores/Citra/Core/include";
@@ -6624,7 +6632,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -6646,7 +6654,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aoshuang.Libretro;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonesto7.manicemu.libretro;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -6666,7 +6674,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -6689,7 +6697,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aoshuang.Libretro;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonesto7.manicemu.libretro;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -6709,7 +6717,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -6732,7 +6740,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aoshuang.Libretro;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonesto7.manicemu.libretro;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -6752,7 +6760,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -6774,7 +6782,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aoshuang.Libretro;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonesto7.manicemu.libretro;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -6795,7 +6803,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -6817,7 +6825,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aoshuang.Libretro;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonesto7.manicemu.libretro;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -6838,7 +6846,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -6860,7 +6868,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aoshuang.Libretro;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tonesto7.manicemu.libretro;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -6949,7 +6957,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(APP_BUILD_VERSION)";
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7271,7 +7279,7 @@
 				OTHER_MODULE_VERIFIER_FLAGS = "$(inherited) \"-F${PODS_CONFIGURATION_BUILD_DIR}/BetterSegmentedControl\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/BlankSlate\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Closures\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/CloudServiceKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/CollectionViewPagingLayout\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/DNSPageView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Device\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/FLEX\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Fireworks\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/FluentDarkModeKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Fuse\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/GCDWebServer\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/HXPhotoPicker\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Haptica\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardCore\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardNotification\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardReturnManager\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardToolbar\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardToolbarManager\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQTextInputViewNotification\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQTextView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IceCream\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/JXBanner\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/JXPageControl\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/KeychainAccess\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/LookinServer\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ManicEmuCore\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ManicSupport\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/MarqueeLabel\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/NVActivityIndicatorView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/OAuthSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Permission\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ProHUD\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Realm\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SFSafeSymbols\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SQLCipher\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SQLite.swift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SSZipArchive\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Schedule\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ShowTouches\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SideMenu\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SnapKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SwifterSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SwipeCellKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Tiercel\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/VisualEffectView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation\"";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "${APP_BUNDLE_IDENTIFIER}";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = "${APP_BUNDLE_IDENTIFIER}";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.tonesto7.manicemu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -7295,7 +7303,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
@@ -7325,7 +7333,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../Cores/Citra/Dependencies/XCFrameworks",
-					/opt/homebrew/Cellar/boost/1.89.0/lib,
+					/opt/homebrew/lib,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACH_O_TYPE = staticlib;
@@ -7345,7 +7353,7 @@
 					/usr/local/include,
 					"$(HOME)/VulkanSDK/1.4.309.0/macOS/include",
 					"$(HOME)/VulkanSDK/1.4.309.0/macOS/include/vma",
-					/opt/homebrew/Cellar/boost/1.89.0/include,
+					/opt/homebrew/include,
 				);
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../Cores/Citra/Core/include";
@@ -7427,7 +7435,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(APP_BUILD_VERSION)";
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7646,7 +7654,7 @@
 				OTHER_MODULE_VERIFIER_FLAGS = "$(inherited) \"-F${PODS_CONFIGURATION_BUILD_DIR}/BetterSegmentedControl\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/BlankSlate\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Closures\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/CloudServiceKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/CollectionViewPagingLayout\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/DNSPageView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Device\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/FLEX\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Fireworks\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/FluentDarkModeKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Fuse\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/GCDWebServer\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/HXPhotoPicker\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Haptica\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardCore\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardNotification\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardReturnManager\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardToolbar\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardToolbarManager\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQTextInputViewNotification\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQTextView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IceCream\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/JXBanner\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/JXPageControl\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/KeychainAccess\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/LookinServer\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ManicEmuCore\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ManicSupport\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/MarqueeLabel\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/NVActivityIndicatorView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/OAuthSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Permission\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ProHUD\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Realm\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SFSafeSymbols\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SQLCipher\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SQLite.swift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SSZipArchive\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Schedule\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ShowTouches\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SideMenu\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SnapKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SwifterSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SwipeCellKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Tiercel\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/VisualEffectView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation\"";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "${APP_BUNDLE_IDENTIFIER}";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = "${APP_BUNDLE_IDENTIFIER}";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.tonesto7.manicemu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -7670,7 +7678,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_OPTIMIZATION_LEVEL = s;
@@ -7698,7 +7706,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../Cores/Citra/Dependencies/XCFrameworks",
-					/opt/homebrew/Cellar/boost/1.89.0/lib,
+					/opt/homebrew/lib,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACH_O_TYPE = staticlib;
@@ -7718,7 +7726,7 @@
 					/usr/local/include,
 					"$(HOME)/VulkanSDK/1.4.309.0/macOS/include",
 					"$(HOME)/VulkanSDK/1.4.309.0/macOS/include/vma",
-					/opt/homebrew/Cellar/boost/1.89.0/include,
+					/opt/homebrew/include,
 				);
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../Cores/Citra/Core/include";
@@ -7866,7 +7874,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(APP_BUILD_VERSION)";
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -8085,7 +8093,7 @@
 				OTHER_MODULE_VERIFIER_FLAGS = "$(inherited) \"-F${PODS_CONFIGURATION_BUILD_DIR}/BetterSegmentedControl\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/BlankSlate\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Closures\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/CloudServiceKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/CollectionViewPagingLayout\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/DNSPageView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Device\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/FLEX\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Fireworks\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/FluentDarkModeKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Fuse\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/GCDWebServer\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/HXPhotoPicker\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Haptica\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardCore\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardNotification\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardReturnManager\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardToolbar\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardToolbarManager\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQTextInputViewNotification\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQTextView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IceCream\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/JXBanner\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/JXPageControl\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/KeychainAccess\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/LookinServer\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ManicEmuCore\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ManicSupport\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/MarqueeLabel\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/NVActivityIndicatorView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/OAuthSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Permission\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ProHUD\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Realm\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SFSafeSymbols\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SQLCipher\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SQLite.swift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SSZipArchive\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Schedule\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ShowTouches\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SideMenu\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SnapKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SwifterSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SwipeCellKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Tiercel\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/VisualEffectView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation\"";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "${APP_BUNDLE_IDENTIFIER}";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = "${APP_BUNDLE_IDENTIFIER}";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.tonesto7.manicemu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -8111,7 +8119,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = "$(APP_BUILD_VERSION)";
-				DEVELOPMENT_TEAM = UU52N52JLD;
+				DEVELOPMENT_TEAM = 4MUU3H6AK5;
 				ENABLE_DEBUG_DYLIB = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -8315,7 +8323,7 @@
 				OTHER_MODULE_VERIFIER_FLAGS = "$(inherited) \"-F${PODS_CONFIGURATION_BUILD_DIR}/BetterSegmentedControl\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/BlankSlate\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Closures\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/CloudServiceKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/CollectionViewPagingLayout\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/DNSPageView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Device\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Fireworks\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/FluentDarkModeKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Fuse\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/GCDWebServer\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/HXPhotoPicker\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Haptica\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardCore\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardNotification\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardReturnManager\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardToolbar\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardToolbarManager\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQTextInputViewNotification\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IQTextView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/IceCream\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/JXBanner\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/JXPageControl\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/KeychainAccess\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ManicEmuCore\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ManicSupport\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/MarqueeLabel\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/NVActivityIndicatorView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/OAuthSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Permission\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ProHUD\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Realm\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SFSafeSymbols\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SQLCipher\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SQLite.swift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SSZipArchive\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Schedule\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SideMenu\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SnapKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SwifterSwift\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/SwipeCellKit\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/Tiercel\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/VisualEffectView\" \"-F${PODS_CONFIGURATION_BUILD_DIR}/ZIPFoundation\"";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "${APP_BUNDLE_IDENTIFIER}";
-				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = "${APP_BUNDLE_IDENTIFIER}";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.tonesto7.manicemu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
