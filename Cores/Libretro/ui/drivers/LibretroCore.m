@@ -238,19 +238,7 @@ NSString * const MAMEGameFileMissingNotification = @"MAMEGameFileMissingNotifica
       mod |= RETROKMOD_NUMLOCK;
 
    if (ch && ch.length != 0)
-   {
-      unsigned i;
       character = [ch characterAtIndex:0];
-
-      apple_input_keyboard_event(down,
-                                 (uint32_t)press.key.keyCode, 0, mod,
-                                 RETRO_DEVICE_KEYBOARD);
-
-      for (i = 1; i < ch.length; i++)
-         apple_input_keyboard_event(down,
-                                    0, [ch characterAtIndex:i], mod,
-                                    RETRO_DEVICE_KEYBOARD);
-   }
 
    if (@available(iOS 13.4, tvOS 13.4, *))
       apple_input_keyboard_event(down,

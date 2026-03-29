@@ -26,8 +26,16 @@ class ManicApplication: UIApplication {
         }
     }
     
-    // 处理键盘事件 - 对应Objective-C中的handleKeyUIEvent方法 主要将键盘事件传递给DeltaCore
+    // 处理键盘事件 - 对应Objective-C中的handleKeyUIEvent方法
+    // DOS游戏通过此方法处理键盘输入（keyboardEvent:已包含去重和key-repeat过滤）
+    // DeltaCore游戏通过ControllerView处理键盘输入
     override func handleKeyboardKey(for event: UIEvent) {
+        // DOS游戏：通过keyboardEvent:处理，该方法已包含完整的去重逻辑
+        if PlayViewController.isGaming, PlayViewController.currentGameType == .dos {
+            LibretroCore.sharedInstance().keyboardEvent(event)
+            return
+        }
+        
         super.handleKeyboardKey(for: event)
         
         if #available(iOS 26.0, *) {
@@ -45,20 +53,14 @@ class ManicApplication: UIApplication {
     
     
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        if let event, PlayViewController.isGaming, PlayViewController.currentGameType == .dos {
-            for press in presses {
-                LibretroCore.sharedInstance().handle(press, with: event, down: true)
-            }
-        }
+        // DOS游戏的键盘输入已通过handleKeyboardKey -> keyboardEvent:处理
+        // 不再通过pressesBegan发送，避免重复
         super.pressesBegan(presses, with: event)
     }
     
     override func pressesEnded(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        if let event, PlayViewController.isGaming, PlayViewController.currentGameType == .dos {
-            for press in presses {
-                LibretroCore.sharedInstance().handle(press, with: event, down: false)
-            }
-        }
+        // DOS游戏的键盘输入已通过handleKeyboardKey -> keyboardEvent:处理
+        // 不再通过pressesEnded发送，避免重复
         super.pressesEnded(presses, with: event)
     }
     
